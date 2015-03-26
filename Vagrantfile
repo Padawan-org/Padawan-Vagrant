@@ -10,6 +10,8 @@ Vagrant.configure(2) do |config|
     machine.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: true 	#node
     machine.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true 	#mongo
 
+    machine.vm.synced_folder "webapps", "/opt/tomcat/webapps", create: false
+
     machine.vm.provision "java", type: "shell", inline: <<-SHELL
       echo "Install Java"
       sudo apt-get -y -q install software-properties-common htop
