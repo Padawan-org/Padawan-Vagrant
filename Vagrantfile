@@ -3,11 +3,8 @@
 
 Vagrant.configure(2) do |config|
   machine.vm.define 'padawan-vagrant' do |machine|
-    machine.vm.box = "base"
-    # Disable automatic box update checking. If you disable this, then
-    # boxes will only be checked for updates when the user runs
-    # `vagrant box outdated`. This is not recommended.
-    # machine.vm.box_check_update = false
+    machine.vm.box = "ubuntu/trusty64
+    machine.vm.box_check_update = true
 
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. In the example below,
