@@ -12,6 +12,11 @@ Vagrant.configure(2) do |config|
 
     machine.vm.synced_folder "webapps", "/opt/tomcat/webapps", create: false
 
+    machine.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "256"
+    end
+
     machine.vm.provision "java", type: "shell", inline: <<-SHELL
       echo "Install Java"
       sudo apt-get -y -q install software-properties-common htop
