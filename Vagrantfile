@@ -8,6 +8,7 @@ Vagrant.configure(2) do |config|
 
     machine.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true	#tomcat
     machine.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: true 	#node
+    machine.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true 	#mongo
 
     machine.vm.provision "java", type: "shell", inline: <<-SHELL
       echo "Install Java"
@@ -36,6 +37,15 @@ Vagrant.configure(2) do |config|
       curl -sL https://deb.nodesource.com/setup | sudo bash -
       sudo apt-get -y install nodejs
       sudo apt-get -y install build-essential
+    SHELL
+
+    machine.vm.provision "mongodb", type: "shell", inline: <<-SHELL
+      echo "Install mongo"
+      export LC_ALL=C
+      sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+      echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+      sudo apt-get -qq update
+      sudo apt-get -y -q install mongodb-org
     SHELL
   end
 end
