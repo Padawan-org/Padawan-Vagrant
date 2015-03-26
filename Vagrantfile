@@ -54,5 +54,8 @@ Vagrant.configure(2) do |config|
       sudo apt-get -qq update
       sudo apt-get -y -q install mongodb-org
     SHELL
+
+    machine.vm.post_up_message = "Hi there!\nTo start tomcat use $CATALINA_BASE/bin/startup.sh\nTo stop tomcat use $CATALINA_BASE/bin/shotdown.sh\nIf that don't work you may need to open Vagrant file and copy the contents of 'afterLoginFile' provision script.\n Sorry. =("
+
   end
 end
