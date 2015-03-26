@@ -7,6 +7,7 @@ Vagrant.configure(2) do |config|
     machine.vm.box_check_update = true
 
     machine.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true	#tomcat
+    machine.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: true 	#node
 
     machine.vm.provision "java", type: "shell", inline: <<-SHELL
       echo "Install Java"
@@ -28,6 +29,13 @@ Vagrant.configure(2) do |config|
       sudo mv -f apache-tomcat-8.0.20/* /opt/tomcat
       export JAVA_HOME=/usr/lib/jvm/java-8-oracle
       export CATALINA_HOME=/opt/tomcat
+    SHELL
+
+    machine.vm.provision "nodejs", type: "shell", inline: <<-SHELL
+      echo "Install node"
+      curl -sL https://deb.nodesource.com/setup | sudo bash -
+      sudo apt-get -y install nodejs
+      sudo apt-get -y install build-essential
     SHELL
   end
 end
