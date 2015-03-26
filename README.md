@@ -51,3 +51,10 @@ This command will rerun provision scripts. You can select which script you will 
 This project is inspired by [Monitauro Vagrant Rails](https://github.com/pragmaticivan/minotauro_vagrant_rails) which is a virtual machine for Ruby on Rails Application Development.
 
 Thanks to [Rachid Calazans](https://github.com/rachidcalazans) and [Danilo Alcoforado]()
+
+## Future and improvements
+On future I want to put others scripts.
+
+If you want to help by adding a new script or anything else [Create a issue](https://github.com/Dlimaun/Padawan-Vagrant/issues/new).
+
+Thanks
