@@ -27,16 +27,17 @@ Vagrant.configure(2) do |config|
       sudo apt-get -y -q install oracle-java8-installer
       sudo apt-get -y -q install oracle-java8-set-default
       update-java-alternatives -s java-8-oracle
+      echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle">>/etc/environment
     SHELL
 
     machine.vm.provision "tomcat", type: "shell", inline: <<-SHELL
+      echo "Install tomcat"
       if [ ! -f apache-tomcat-8.0.20.tar.gz ]; then
         wget http://mirror.nbtelecom.com.br/apache/tomcat/tomcat-8/v8.0.20/bin/apache-tomcat-8.0.20.tar.gz
         tar xvzf apache-tomcat-8.0.20.tar.gz
       fi
       sudo mv -f apache-tomcat-8.0.20/* /opt/tomcat
-      export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-      export CATALINA_HOME=/opt/tomcat
+      echo "CATALINA_HOME=/opt/tomcat">>/etc/environment
     SHELL
 
     machine.vm.provision "nodejs", type: "shell", inline: <<-SHELL
