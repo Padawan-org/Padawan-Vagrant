@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
     machine.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: true 	#node
     machine.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true 	#mongo
 
-    machine.vm.synced_folder "webapps", "/opt/tomcat/webapps", create: false
+    machine.vm.synced_folder "webapps", "/opt/tomcat/webapps", create: true
 
     machine.vm.provider "virtualbox" do |vb|
       vb.gui = false
