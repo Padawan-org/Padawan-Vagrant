@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Padawan-vagrant by Dlimaun</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Padawan-vagrant</h1>
+        <h2>This is a simple project to build a virtual development enviroment using vagrant. It will download and install all you needs using just shell scripts.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/Dlimaun/Padawan-Vagrant/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/Dlimaun/Padawan-Vagrant/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/Dlimaun/Padawan-Vagrant" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="padawan-vagrant" class="anchor" href="#padawan-vagrant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Padawan-Vagrant</h1>
+
+<p>This is a simple project to build a virtual development environment using vagrant. It will download and install all you needs using just shell scripts.</p>
+
+<h2>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<p>You will need to install these tools.</p>
+
+<ul>
+<li><a href="https://www.virtualbox.org">VirtualBox</a></li>
+<li><a href="http://vagrantup.com">Vagrant</a></li>
+</ul>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Is your first time using vagrant? It's so simple you just need to run <code>vagrant up</code>. Just remember to be on same directory of Vagrantfile.
+It would be like that:</p>
+
+<pre><code>host$ git clone https://github.com/Dlimaun/padawan-vagrant.git
+host$ cd padawan-vagrant`
+host$ vagrant up
+</code></pre>
+
+<p>Your virtual machine is running! \o/
+Let's access it with:</p>
+
+<pre><code>host$ vagrant ssh
+</code></pre>
+
+<h2>
+<a id="whats-installed" class="anchor" href="#whats-installed" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's installed</h2>
+
+<p>There's nothing preinstalled you will select what you need.
+Open the <code>Vagrantfile</code> and change the variables on top of the file, mark <code>true</code> on what you want to be installed.
+There are scripts to install that below but you can add yours too!</p>
+
+<ul>
+<li><a href="http://java.com/">Java 8</a></li>
+<li><a href="https://www.mongodb.org">MongoDB 3</a></li>
+<li><a href="https://nodejs.org/">NodeJs</a></li>
+<li><a href="http://tomcat.apache.org/">Apache Tomcat 8</a></li>
+</ul>
+
+<h2>
+<a id="useful-comands" class="anchor" href="#useful-comands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Useful Comands</h2>
+
+<p>You need to know some commands to use vagrant</p>
+
+<pre><code>host$ vagrant suspend
+</code></pre>
+
+<p>This command save the current state of the machine and then stops it. Is useful when you want to continue what you're doing later. This will make your machine start super fast on next <code>vagrant up</code>.</p>
+
+<pre><code>host$ vagrant halt
+</code></pre>
+
+<p>This command realy shutdown the machine. Means that the current state isn't saved. This method don't save the machine ram on disk like the <code>vagrant suspend</code>, but consumes extra disk space.</p>
+
+<pre><code>host$ vagrant destroy
+</code></pre>
+
+<p>This command you clear you disk, removing all everything from your guest machine. Be careful.</p>
+
+<pre><code>host$ vagrant login
+host$ vagrant share
+</code></pre>
+
+<p>I recommend you to use this command to share your box with others. When you use vagrant you will download the <em>"brute" OS</em> and then install all you want using provisionning tools, but that isn't the fast way to share your box because your machine have to download everything after install the <em>OS</em>. So when your box is configured share with your team members. You'll need to create a acount on <a href="https://atlas.hashicorp.com/account/new">HashiCorp's Atlas</a>.</p>
+
+<pre><code>host$ vagrant provision
+</code></pre>
+
+<p>This command will rerun provision scripts. You can select which script you will want using <code>--provision-with=&lt;name&gt;</code> where <code>&lt;name&gt;</code> is the name of you provision script.</p>
+
+<h2>
+<a id="inspiration-and-thanks" class="anchor" href="#inspiration-and-thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inspiration and Thanks</h2>
+
+<p>This project is inspired by <a href="https://github.com/pragmaticivan/minotauro_vagrant_rails">Minotauro Vagrant Rails</a> which is a virtual machine for Ruby on Rails Application Development.</p>
+
+<p>Thanks to <a href="https://github.com/rachidcalazans">Rachid Calazans</a> and <a href="">Danilo Alcoforado</a></p>
+
+<h2>
+<a id="future-and-improvements" class="anchor" href="#future-and-improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future and improvements</h2>
+
+<p>On future I want to put others scripts.</p>
+
+<p>If you want to help by adding a new script or anything else <a href="https://github.com/Dlimaun/Padawan-Vagrant/issues/new">Create a issue</a>.</p>
+
+<p>Thanks</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
