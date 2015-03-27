@@ -20,8 +20,8 @@ Let's access it with:
     host$ vagrant ssh
 
 ## What's installed
-There are nothing preinstalled you will select what you need.
-Open `Vagrantfile` and remove/comment what you don't want.
+There's nothing preinstalled you will select what you need.
+Open the `Vagrantfile` and change the variables on top of the file, mark `true` on what you want to be installed.
 There are scripts to install that below but you can add yours too!
 * [Java 8](http://java.com/)
 * [MongoDB 3](https://www.mongodb.org)
