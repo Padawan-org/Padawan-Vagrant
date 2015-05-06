@@ -94,8 +94,9 @@ Vagrant.configure(2) do |config|
       #machine.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
       machine.vm.provision "ruby", type: "shell", inline: <<-SHELL
         echo "Install ruby"
-        sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-        curl -L https://get.rvm.io | bash -s stable
+        sudo apt-get -qq -y install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+        gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+        curl -sSL https://get.rvm.io | bash -s stable --ruby
         source ~/.rvm/scripts/rvm
         rvm install 2.2.2
         rvm use 2.2.2 --default
@@ -113,7 +114,7 @@ Vagrant.configure(2) do |config|
         echo "Install nodeJs"
         sudo add-apt-repository ppa:chris-lea/node.js
         sudo apt-get update
-        sudo apt-get install nodejs
+        sudo apt-get -qq -y install nodejs
 
         echo "Install Rails gem"
         gem install rails -v 4.2.1
@@ -127,9 +128,9 @@ Vagrant.configure(2) do |config|
         echo "Install postgresql"
         sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
         wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
-        sudo apt-get update
-        sudo apt-get install postgresql-common
-        sudo apt-get install postgresql-9.3 libpq-dev
+        sudo apt-get -qq -y update
+        sudo apt-get -qq -y install postgresql-common
+        sudo apt-get -qq -y install postgresql-9.3 libpq-dev
 
         echo "Set postgre password"
         sudo -u postgres psql -c"ALTER user postgres WITH PASSWORD 'postgres'"
