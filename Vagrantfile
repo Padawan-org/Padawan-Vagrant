@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+INSTALL_GIT = true
 INSTALL_MONGO = false
 INSTALL_NODE  = false
 INSTALL_TOMCAT= false
@@ -23,6 +24,13 @@ Vagrant.configure(2) do |config|
       vb.gui = false
       vb.memory = "1024"
       vb.cpus = 1
+    end
+
+    if INSTALL_GIT
+      machine.vm.provision "git", type: "shell", inline: <<-SHELL
+        echo "Install Git"
+        sudo apt-get -y -qq install git
+      SHELL
     end
 
     if INSTALL_JAVA
