@@ -21,7 +21,8 @@ Vagrant.configure(2) do |config|
 
     machine.vm.provider "virtualbox" do |vb|
       vb.gui = false
-      vb.memory = "256"
+      vb.memory = "1024"
+      vb.cpus = 1
     end
 
     if INSTALL_JAVA
