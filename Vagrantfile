@@ -5,12 +5,19 @@ INSTALL_MONGO = false
 INSTALL_NODE  = false
 INSTALL_TOMCAT= false
 INSTALL_JAVA  = false
+INSTALL_JENKINS = false
+INSTALL_RUBY = true
+INSTALL_RAILS = true
+INSTALL_POSTGRESQL = true
 
 post_message = "Hi there!\n"
 Vagrant.configure(2) do |config|
   config.vm.define 'padawan-vagrant' do |machine|
     machine.vm.box = "ubuntu/trusty64"
-    machine.vm.box_check_update = true
+    machine.vm.box_check_update = false
+    machine.vm.network "private_network", ip: "10.0.0.2"
+    #machine.vm.network "public_network"
+    machine.vm.hostname = "padawan-vagrant"
 
     machine.vm.provider "virtualbox" do |vb|
       vb.gui = false
@@ -68,6 +75,64 @@ Vagrant.configure(2) do |config|
         echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
         sudo apt-get -qq update
         sudo apt-get -y -qq install mongodb-org
+      SHELL
+    end
+
+    if INSTALL_JENKINS
+      machine.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
+      machine.vm.provision "jenkins", type: "shell", inline: <<-SHELL
+        echo "Install jenkins"
+        wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+        echo "deb http://pkg.jenkins-ci.org/debian binary/" | sudo tee /etc/apt/sources.list.d/jenkins-ci.list
+        sudo apt-get -qq update
+        sudo apt-get -qq -y install jenkins
+      SHELL
+    end
+
+    if INSTALL_RUBY
+      #machine.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
+      machine.vm.provision "ruby", type: "shell", inline: <<-SHELL
+        echo "Install ruby"
+        sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+        curl -L https://get.rvm.io | bash -s stable
+        source ~/.rvm/scripts/rvm
+        rvm install 2.2.2
+        rvm use 2.2.2 --default
+        ruby -v
+
+        echo "Install Bundler"
+        echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+        gem install bundler
+      SHELL
+    end
+
+    if INSTALL_RAILS
+      machine.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+      machine.vm.provision "rails", type: "shell", inline: <<-SHELL
+        echo "Install nodeJs"
+        sudo add-apt-repository ppa:chris-lea/node.js
+        sudo apt-get update
+        sudo apt-get install nodejs
+
+        echo "Install Rails gem"
+        gem install rails -v 4.2.1
+        rails -v
+      SHELL
+    end
+
+    if INSTALL_POSTGRESQL
+      machine.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
+      machine.vm.provision "postgresql", type: "shell", inline: <<-SHELL
+        echo "Install postgresql"
+        sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
+        wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+        sudo apt-get update
+        sudo apt-get install postgresql-common
+        sudo apt-get install postgresql-9.3 libpq-dev
+
+        echo "Set postgre password"
+        sudo -u postgres psql -c"ALTER user postgres WITH PASSWORD 'postgres'"
+        sudo service postgresql restart
       SHELL
     end
 
