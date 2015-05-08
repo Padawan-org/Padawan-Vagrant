@@ -23,10 +23,17 @@ Let's access it with:
 There's nothing preinstalled you will select what you need.
 Open the `Vagrantfile` and change the variables on top of the file, mark `true` on what you want to be installed.
 There are scripts to install that below but you can add yours too!
+* [Apache Tomcat 8](http://tomcat.apache.org/)
+* [Git](http://git-scm.com/)
 * [Java 8](http://java.com/)
+* [Jenkins CI](https://jenkins-ci.org/)
 * [MongoDB 3](https://www.mongodb.org)
 * [NodeJs](https://nodejs.org/)
-* [Apache Tomcat 8](http://tomcat.apache.org/)
+* [PostgreSql](http://www.postgresql.org/)
+* [Ruby](https://www.ruby-lang.org)
+* [Ruby on Rails](http://rubyonrails.org/)
+
+Everything is installed by `shell` provisioner and there's no pre-requisits validations. So You'll need check that out before. Example: `Jenkins` needs `Java`, then you need to mark `java` as `true` too.
 
 ## Useful Comands
 You need to know some commands to use vagrant
