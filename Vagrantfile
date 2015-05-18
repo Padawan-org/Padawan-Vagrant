@@ -19,6 +19,7 @@ Vagrant.configure(2) do |config|
     machine.vm.network "private_network", ip: "10.0.0.2"
     #machine.vm.network "public_network"
     machine.vm.hostname = "padawan-vagrant"
+    machine.vm.synced_folder ".", "/workspace"
 
     machine.vm.provider "virtualbox" do |vb|
       vb.gui = false
