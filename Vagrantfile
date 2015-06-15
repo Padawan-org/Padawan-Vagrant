@@ -10,6 +10,7 @@ INSTALL_JENKINS = false
 INSTALL_RUBY = true
 INSTALL_RAILS = true
 INSTALL_POSTGRESQL = true
+INSTALL_METEOR = true
 
 post_message = "Hi there!\n"
 Vagrant.configure(2) do |config|
@@ -72,6 +73,14 @@ Vagrant.configure(2) do |config|
       machine.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
       machine.vm.provision "postgresql", type: "shell", path: "scripts/postgre.sh"
     end
+
+	if INSTALL_METEOR
+      machine.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+	  machine.vm.provision "meteor", type: "shell", inline: <<-SHELL
+		curl https://install.meteor.com/ | sh
+		sudo -H npm install -g meteorite
+      SHELL
+	end
 
     machine.vm.post_up_message = post_message + "Access you machine using: vagrant ssh\n\\o/"
 
