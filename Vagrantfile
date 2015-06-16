@@ -82,7 +82,7 @@ Vagrant.configure(2) do |config|
       SHELL
 	end
 
-    machine.vm.post_up_message = post_message + "Access you machine using: vagrant ssh\n\\o/"
+    machine.vm.post_up_message = post_message + "Access your machine using: vagrant ssh\n\\o/"
 
   end
 end
