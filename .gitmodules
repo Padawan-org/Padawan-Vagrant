@@ -1,0 +1,3 @@
+[submodule "scritps"]
+	path = provisioning/scripts
+	url = git@github.com:Padawan-org/Install-Scripts.git
