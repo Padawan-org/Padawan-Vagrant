@@ -65,3 +65,11 @@ On future I want to put others scripts.
 If you want to help by adding a new script or anything else [Create a issue](https://github.com/Dlimaun/Padawan-Vagrant/issues/new).
 
 Thanks
+
+# Useful Aliases
+I use these aliases on my machine, just put then in your *bashrc*
+
+        alias vus='vagrant up && vagrant ssh'
+        alias vs='vagrant status'
+        alias vh='vagrant halt'
+        alias vssh='vagrant ssh'
